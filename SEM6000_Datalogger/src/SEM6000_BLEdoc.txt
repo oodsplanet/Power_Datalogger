@@ -1,0 +1,90 @@
+
+Sniffed modes:
+
+Nachtmodus ein / aus: f 9 f 0 5 0 0 0 0 0 15 ff ff 
+Überstromanzege 3699 :f 7 5 0 e 73 0 0 87 ff ff 
+Überstromanzege 1111 :f 7 5 0 4 57 0 0 61 ff ff 
+Überstromanzege 1024 :f 7 5 0 4 0  0 0 a  ff ff 
+Überstromanzege 2048 :f 7 5 0 8 0 0 0 e ff ff 
+Tarif: f 5 7 0 0 0 8 ff ff 
+Name setzen "hugo" 2 Pakete:
+                f 17 2 0 68 75 67 6f 0 0 0 0 0 0 0 0 0 0 0 0  
+                0 0 0 0 b6 ff ff
+
+dauer-Abfrage bei Geräteliste: (werte werden hochgezählt)
+ f c 1 0 1c 24 14 1e a 7 e7 0 0 6c ff ff 
+ f c 1 0 25 28 14 1e a 7 e7 0 0 79 ff ff 
+
+Umshalten auf "Strom,"   : f 5 c 0 0 0 d ff ff 
+Umschalten auf "Energie" : f 5 a 0 0 0 b ff ff 
+Umschalten auf "Timer"   : f 5 9 0 0 0 a ff ff 
+
+ein :f 6 3 0 1 0 0 5 ff ff
+aus: f 6 3 0 0 0 0 4 ff ff 
+
+dauernde Abfrage bi "Strom,": (ev akteulle Daten ? Authentifizierung!)
+f c 17 0 0 0 0 0 0 0 0 0 0 18 ff ff 
+
+Timer Start: f e 8 0 1 4 31 14 1e a 17 0 0 0 0 92  ff ff
+
+
+Connection:
+Connected to: Voltcraft A3:00:00:00:4C:FA
+
+-- NAME
+Characteristic: OxFFF1 (Custom Characteristic)
+UUID: 0000fff1-0000-1000-8000-00805f9b34fb
+Properties: READ, WRITE WITHOUT RESPONSE
+Write Type: Write Without Response
+Instance: 16
+Read:
+56 4F 4C 43 46 54 04 00        VOLCFT
+00 00 00 01 16 03 00 14
+
+
+-- CONTROL
+Characteristic: 0xFFF3 (Custom Characteristic)
+UUID: 0000fff3-0000-1000-8000-00805f9b34fb
+Properties: WRITE WITHOUT RESPONSE
+Write Type: Write Without Response
+Instance: 18
+
+-- RESPONSE
+Characteristic: 0xFFF4 (Custom Characteristic)
+UUID: 0000fff4-0000-1000-8000-00805f9b34fb
+Properties: NOTIFY
+Write Type: Default
+Instance: 20
+
+Descriptor: 0x2902 (Client Characteristic Configuration)
+UUID: 0000fff4-0000-1000-8000-00805f9b34fb
+
+---------------------------------------------------------------------
+Connection:
+Connected to: ESP_BLESniffer 98:F4:AB:6C:62:3E
+
+Service: 0xFFF0 (Custom Service)
+UUID: 0000fff0-0000-1000-8000-00805f9b34fb
+Service Type: Primary
+Instance: 40
+
+-- RESPONSE
+Characteristic: 0xFFF4 (Custom Characteristic)
+UUID: 0000fff4-0000-1000-8000-00805f9b34fb
+Properties: NOTIFY
+Write Type: Default
+Instance: 42
+
+-- CONTROL
+Characteristic: 0xFFF3 (Custom Characteristic)
+UUID: 0000fff3-0000-1000-8000-00805f9b34fb
+Properties: WRITE WITHOUT RESPONSE
+Write Type: Write Without Response
+Instance: 44
+
+-- NAME
+Characteristic: 0xFFF1 (Custom Characteristic)
+UUID: 0000fff1-0000-1000-8000-00805f9b34fb
+Properties: READ, WRITE WITHOUT RESPONSE
+Write Type: Write Without Response
+Instance: 46
