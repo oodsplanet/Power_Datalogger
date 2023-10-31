@@ -1,0 +1,43 @@
+documentation for the SEM6000_datalogger
+
+31.01.2023
+
+restrictions:
+
+// device, hardware
+- (hardcoded) Name of the Voltcraft device for BLE has to be "Voltcraft" 
+the device selection is done automatically by this name!
+A list for selection of devices has to be implemented in the future
+
+// SD logging
+- (hardcoded) name of the configuration file on SD : "config.txt"
+- has to be placed in root directory
+- file naming of log-file is restricted to DOS ( 8.3 characters, case insensitive )
+- format of SD-crad is FAT32
+
+- config file format example:
+--------------------
+t:00:00:05
+f:TKS
+--------------------
+t:hh:mm:ss is the measuring time intervall
+f:ABCDEFG  is the prefix of the logfilename , must not be longer than 7 characters 
+(results in ABCDEFG0.txt ABCDEFG1.txt etc ) better use a shorter filename prefix
+
+// web interface
+- the logger is running in AP (accesspoint) mode with fixed IP: 192.168.4.1
+- the webpage is reloaded each 2 seconds
+- starting measurement will be done by presing [ON]
+- ending  measurement will be done by presing [OFF] which turns off the LED ring
+
+Hardware:
+
+SDCard                 ESP32
+GND ----- brown ------ GND(6)
+3v3
+5V  ----- red -------- 5V(1)
+CS  ----- orange ----- G22  (can be changd by software SD.begin())
+MOSI ---- blue ------- G23
+SCK ----- yellow ----- G18
+MISO ---- green ------ G19
+
