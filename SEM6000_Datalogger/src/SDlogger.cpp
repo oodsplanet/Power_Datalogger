@@ -1,6 +1,9 @@
 #include <SDlogger.h>
 
-SDLogger::SDLogger(SDFS& sd) : SDFS(sd) {}
+SDLogger::SDLogger(SDFS& sd) : SDFS(sd) 
+{
+    _logfilepraefix = SDLOGGER_DEFPRAEFIX;
+}
 
 void SDLogger::readConfigFileIntern(const String& filename,  String& logfileprefix, unsigned long& intervallms)
 {
@@ -76,7 +79,9 @@ bool SDLogger::createLogfileName(const String& prefix, String& fname)
     i=1;
     while (i<maxnum)
     {
-        fname = prefix+String(i)+SDLOGGER_DEFEXT;
+        // we ned to add a / for the SD card used on SPI bus 
+        // not needed for the RTC+SD shied on teh arduino UNO
+        fname = "/"+prefix+String(i)+SDLOGGER_DEFEXT;
         #ifdef DEBUG_SDLOGGER
         Serial.print("try:"); Serial.println(fname);
         #endif
@@ -89,26 +94,26 @@ bool SDLogger::createLogfileName(const String& prefix, String& fname)
       // create and open logfile 
 bool SDLogger::createLogfile()
 {
-      if (!createLogfileName(_logfilepraefix, _logfilename))
-      {
-          #ifdef  DEBUG_SDLOGGER
-          Serial.println("E : filename creation error");
-          #endif
-          return false;
-      }
-      else 
-      {
-        _logfile=open(_logfilename,FILE_WRITE);
-        if (!_logfile)
-        {
-            #ifdef  DEBUG_SDLOGGER
-            Serial.println("error opening logfile"+logfilename);        
-            Serial.flush();
-            #endif
-            return false;
+    uint8_t retries = 0;
+    while (retries < 2) {
+        if (createLogfileName(_logfilepraefix, _logfilename) && (_logfile = open(_logfilename, FILE_WRITE))) {
+            // Successful file creation and opening
+            return true;
         }
-      }
-      return true;
+
+        #ifdef DEBUG_SDLOGGER
+        Serial.println("Error creating/opening log file: " + String(logfilename));
+        Serial.flush();
+        #endif
+
+        if (retries < 1) {
+            _logfilepraefix = SDLOGGER_DEFPRAEFIX;
+            retries++;
+        } else {
+            return false; // Max retries reached
+        }
+    }
+    return false; // Shouldn't reach here, but added for clarity
 }
 
 

@@ -4,7 +4,7 @@
 #include <SD.h>
 
 #define SDLOGGER_MININTERVALL 1000
-#define SDLOGGER_DEFPRAEFIX "/log"
+#define SDLOGGER_DEFPRAEFIX "log"
 #define SDLOGGER_DEFEXT ".txt"
 
 /// @brief wrapper class for logging system o SD-card
@@ -36,12 +36,12 @@ class SDLogger : public SDFS
     SDLogger(SDFS& sd);    
 
     File& logfile() { return _logfile; }
-
+    String& logfilepraefix() { return _logfilepraefix; };      // logfile praefix 
+    
     /// @brief read configuration file from SD-card
     /// @param filename name of configuration file (eg. config.txt)
     /// @param intervallms loggingintervall in ms
     void readConfigFile(const String& filename, unsigned long& intervallms);
-
 
     /// @brief create and opens logger filename (<name000.ext>)
     /// @return true on succes, false on cannot create a new name 
